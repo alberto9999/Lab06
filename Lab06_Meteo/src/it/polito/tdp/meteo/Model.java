@@ -7,7 +7,7 @@ import it.polito.tdp.meteo.bean.SimpleCity;
 import it.polito.tdp.meteo.db.MeteoDAO;
 
 public class Model {
-//PROVARE A RIFARLO: COPIO NELLE 3 LISTE POI  A OGNI PASSO  INSERISCOuno delle 3 city COME SIMPLE CITY INCREMENTANDO IL COUNTER
+
 	private final static int COST = 50;
 	private final static int NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN = 3;
 	private final static int NUMERO_GIORNI_CITTA_MAX = 6;
@@ -99,8 +99,7 @@ public class Model {
 	    		if(controllaParziale(listaParziale,sc)){
 	    		listaParziale.add(sc);
 	    		c.setCounter(c.getCounter()+1);
-	    		
-	    		
+	
 	    		recursive(listaParziale,livello+1);	
 	    		
 	    		listaParziale.remove(livello);
@@ -117,11 +116,6 @@ public class Model {
 		
 		
 	  }
-	
-		
-		
-	
-	
 	
 
 	private boolean verificaPresenza(List<SimpleCity> soluzioneCandidata) {
@@ -140,7 +134,7 @@ public class Model {
 
 	private Double punteggioSoluzione(List<SimpleCity> soluzioneCandidata) {
      double score=0;
-     for(int k=0;k<soluzioneCandidata.size();k++){
+     for(int k=0;k<NUMERO_GIORNI_TOTALI;k++){
     	 SimpleCity sc=soluzioneCandidata.get(k);
     	 score+=sc.getCosto();
     	 if(k!=soluzioneCandidata.size()-1){
@@ -187,20 +181,5 @@ public class Model {
 }
 
 
-
-	
-		
-	
-
-	
-
-
-
-	
-	
-	
-	
-	
-	
 	
 }
