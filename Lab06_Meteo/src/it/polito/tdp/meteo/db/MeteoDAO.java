@@ -11,6 +11,7 @@ import java.util.List;
 import it.polito.tdp.meteo.bean.Rilevamento;
 
 public class MeteoDAO {
+	
 
 	public List<Rilevamento> getAllRilevamenti() {
 
@@ -23,11 +24,14 @@ public class MeteoDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 
 			ResultSet rs = st.executeQuery();
-
+           
 			while (rs.next()) {
 
 				Rilevamento r = new Rilevamento(rs.getString("Localita"), rs.getDate("Data"), rs.getInt("Umidita"));
 				rilevamenti.add(r);
+				
+				
+				
 			}
 
 			conn.close();
@@ -39,6 +43,9 @@ public class MeteoDAO {
 			throw new RuntimeException(e);
 		}
 	}
+
+
+
 
 	public List<Rilevamento> getAllRilevamentiLocalitaMese(int mese, String localita) {
 	
