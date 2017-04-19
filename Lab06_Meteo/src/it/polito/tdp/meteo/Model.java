@@ -11,7 +11,7 @@ public class Model {
 	private final static int COST = 50;
 	private final static int NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN = 3;
 	private final static int NUMERO_GIORNI_CITTA_MAX = 6;
-	private final static int NUMERO_GIORNI_TOTALI =9;
+	private final static int NUMERO_GIORNI_TOTALI =8;
 	List <SimpleCity> listaParziale;
 	List <SimpleCity>listaBest;
 	List<Citta>listaCitta;
@@ -84,7 +84,8 @@ public class Model {
 	    	if((score<best)&&(verificaPresenza(listaParziale))){
 	    		best=score;
 	    		listaBest.clear();
-	    		listaBest.addAll(listaParziale);
+	  		listaBest.addAll(listaParziale);
+	 // 		System.out.println(best);
 	    		
 	    	}
 	    	//copia nel best verificando il punteggio
@@ -99,13 +100,13 @@ public class Model {
 	    		if(controllaParziale(listaParziale,sc)){
 	    		listaParziale.add(sc);
 	    		c.setCounter(c.getCounter()+1);
-	
-	    		recursive(listaParziale,livello+1);	
 	    		
+	    		recursive(listaParziale,livello+1);	
+    		
 	    		listaParziale.remove(livello);
 	    		c.setCounter(c.getCounter()-1);
-	    		}
-	    		
+	  		
+	    		}	
 	    	}
 	    	
 	    }
@@ -134,13 +135,13 @@ public class Model {
 
 	private Double punteggioSoluzione(List<SimpleCity> soluzioneCandidata) {
      double score=0;
-     for(int k=0;k<NUMERO_GIORNI_TOTALI;k++){
+     for(int k=0;k<NUMERO_GIORNI_TOTALI-1;k++){
     	 SimpleCity sc=soluzioneCandidata.get(k);
     	 score+=sc.getCosto();
-    	 if(k!=soluzioneCandidata.size()-1){
+    	
     	 if(sc.getNome().compareTo(soluzioneCandidata.get(k+1).getNome())!=0){
     		 score+=100;
-    	 }	 
+    	 	 
      }
      }
 		
@@ -149,35 +150,36 @@ public class Model {
 	
 
 
-
 	private boolean controllaParziale(List<SimpleCity> parziale,SimpleCity sc) {
-	boolean bool=false;
-	String nuova= sc.getNome();
-	int compare = nuova.compareTo(prec);
+    int dim=parziale.size();
+	
+    if(dim==0)               //passo 0
+		return true;
+	
+    
+    
+    if(dim>0&&dim<=NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN){                   //primi 3 passi devono essere uguali
+		if(parziale.get(dim-1).getNome().compareTo(sc.getNome())==0)
+			return true;
+	}
+		
 
-	
-	if(compare==0){
-		bool= true;
-	}
-	
-	
-	else{
-     if((cont>=NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN)||(cont==0))   //è 0 solo al primo passaggio
-    	 bool=true;
-	}
-	
-	
-	if(bool==true){
-		if(compare!=0){
-			prec=new String(nuova);
-			cont=0;
+	if(dim>NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN-1){                          //dopo i primi 3 passi prima di ogni immissione verifico che i 3 precedenti siano uguali
+		if(sc.getNome().compareTo(parziale.get(dim-1).getNome())==0){
+			return true;
 		}
-		cont++;}
-
+		else{
+			if((parziale.get(dim-1).getNome().compareTo(parziale.get(dim-2).getNome())==0)&&
+			(parziale.get(dim-1).getNome().compareTo(parziale.get(dim-3).getNome())==0)){
+				return true;
+			}
+		}
+	}
+		
+		
+		return false;
 	
 	
-	return bool;
-
 }
 
 

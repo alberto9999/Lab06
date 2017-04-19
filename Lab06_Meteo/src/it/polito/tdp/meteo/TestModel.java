@@ -23,10 +23,11 @@ public class TestModel {
 	
 		
 		
-		
+		long t1=System.currentTimeMillis();
 	System.out.println(m.trovaSequenza(5));
-		
-		System.out.println(m.trovaSequenza(4));
+		long t2=System.currentTimeMillis();
+		System.out.println((t2-t1)/1000+" secondi");
+	//	System.out.println(m.trovaSequenza(4));
 	
 		
 		
