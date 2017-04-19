@@ -91,7 +91,7 @@ public class Model {
 	    }
 	    else{
 	    
-	    for(int i=0; i<NUMERO_GIORNI_TOTALI;i++){
+	    for(int i=livello; i<NUMERO_GIORNI_TOTALI;i++){
 	    	for(Citta c : listaCitta){
 	    		Rilevamento r= c.getRilevamenti().get(i);
 	    		SimpleCity sc= new SimpleCity(c.getNome(),r.getUmidita()*COST);
