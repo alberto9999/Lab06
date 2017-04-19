@@ -138,7 +138,7 @@ public class Model {
     	 SimpleCity sc=soluzioneCandidata.get(k);
     	 score+=sc.getCosto();
     	 if(k!=soluzioneCandidata.size()-1){
-    	 if(sc.getNome().compareTo(soluzioneCandidata.get(k+1).getNome())==0){
+    	 if(sc.getNome().compareTo(soluzioneCandidata.get(k+1).getNome())!=0){
     		 score+=100;
     	 }	 
      }
