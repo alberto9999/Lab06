@@ -11,7 +11,7 @@ public class Model {
 	private final static int COST = 50;
 	private final static int NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN = 3;
 	private final static int NUMERO_GIORNI_CITTA_MAX = 6;
-	private final static int NUMERO_GIORNI_TOTALI =8;
+	private final static int NUMERO_GIORNI_TOTALI =15;
 	List <SimpleCity> listaParziale;
 	List <SimpleCity>listaBest;
 	List<Citta>listaCitta;
@@ -92,9 +92,9 @@ public class Model {
 	    }
 	    else{
 	    
-	    for(int i=livello; i<NUMERO_GIORNI_TOTALI;i++){
+	//    for(int i=livello; i<NUMERO_GIORNI_TOTALI;i++){
 	    	for(Citta c : listaCitta){
-	    		Rilevamento r= c.getRilevamenti().get(i);
+	    		Rilevamento r= c.getRilevamenti().get(livello);
 	    		SimpleCity sc= new SimpleCity(c.getNome(),r.getUmidita()*COST);
 	    		
 	    		if(controllaParziale(listaParziale,sc)){
@@ -106,7 +106,7 @@ public class Model {
 	    		listaParziale.remove(livello);
 	    		c.setCounter(c.getCounter()-1);
 	  		
-	    		}	
+	    	//	}	
 	    	}
 	    	
 	    }
@@ -158,7 +158,7 @@ public class Model {
 	
     
     
-    if(dim>0&&dim<=NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN){                   //primi 3 passi devono essere uguali
+    if(dim>0 && dim<=NUMERO_GIORNI_CITTA_CONSECUTIVI_MIN){                   //primi 3 passi devono essere uguali
 		if(parziale.get(dim-1).getNome().compareTo(sc.getNome())==0)
 			return true;
 	}
